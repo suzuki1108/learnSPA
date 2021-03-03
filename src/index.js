@@ -1,15 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import SignUp from './SignUp';
 import SignInSide from './SignInSide';
 import Search from './Search';
 import MyBookShelf from './MyBookShelf';
 import {
   BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
+  Route
 } from 'react-router-dom';
 
 ReactDOM.render(
