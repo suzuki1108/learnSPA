@@ -14,6 +14,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function Copyright() {
     return (
@@ -69,6 +71,8 @@ export default function SignInSide() {
 
   //API通信メッセージ
   const[apiMsg, setApiMsg] = useState("");
+
+  const [open, setOpen] = useState(false);
 
   //UserID関連のステート
   const[userId, setUserId] = useState("");
@@ -133,6 +137,7 @@ export default function SignInSide() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
+    setOpen(true);
     fetch("https://suzuki-portfolio.herokuapp.com/loginAPI", {method, headers, body})
       .then(res => res.json())
       .then(data => {
@@ -144,10 +149,14 @@ export default function SignInSide() {
         }
       })
       .catch(console.error);
+    setOpen(false);
   }
 
   return (
     <Grid container component="main" className={classes.root}>
+        <Backdrop className={classes.backdrop} open={open}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       <CssBaseline />
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>

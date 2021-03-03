@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function Copyright() {
   return (
@@ -58,6 +60,8 @@ export default function SignUp() {
 
   //API通信メッセージ
   const[apiMsg, setApiMsg] = useState("");
+
+  const [open, setOpen] = useState(false);
 
   //UserName関連のステート
   const[userName, setUserName] = useState("");
@@ -145,6 +149,7 @@ export default function SignUp() {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     };
+    setOpen(true);
     fetch("https://suzuki-portfolio.herokuapp.com/accountRegisterAPI", {method, headers, body})
       .then(res => res.json())
       .then(data => {
@@ -155,10 +160,14 @@ export default function SignUp() {
         }
       })
       .catch(console.error);
+    setOpen(false);
   }
 
   return (
     <Container component="main" maxWidth="xs">
+        <Backdrop className={classes.backdrop} open={open}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
