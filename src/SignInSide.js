@@ -66,7 +66,7 @@ export default function SignInSide() {
   const history = useHistory();
 
   //グローバルステート（UserId）
-  const {state, dispach} = useContext(UserInfoContext);
+  const {state, dispatch} = useContext(UserInfoContext);
 
   //userID形式チェック正規表現
   const userIdReg = /^[a-z\d]{8,15}$/i;
@@ -148,7 +148,7 @@ export default function SignInSide() {
         setApiMsg(data.message);
         if(data.result){
             //グローバルステートにUserIDを格納し、MyBookShelfへ遷移
-            dispach({
+            dispatch({
               type: "CHANGE",
               userId: data.userId
             })
