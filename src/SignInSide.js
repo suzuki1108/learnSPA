@@ -16,6 +16,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { UserInfoContext } from '.';
 
 function Copyright() {
     return (
@@ -65,7 +66,7 @@ export default function SignInSide() {
   const history = useHistory();
 
   //グローバルステート（UserId）
-  const {state, dispach} = useContext(SiteContext);
+  const {state, dispach} = useContext(UserInfoContext);
 
   //userID形式チェック正規表現
   const userIdReg = /^[a-z\d]{8,15}$/i;
