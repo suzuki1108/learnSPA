@@ -38,11 +38,7 @@ export default function Footer(props) {
   //画面遷移ハンドラ
   const history = useHistory();
 
-  const userId = useContext(userInfo);
-
-  const handleLink = path => history.push(
-    {pathname: path, state: {"userId" :userId}}
-  );
+  const handleLink = path => history.push(path);
 
   const buttonClick = (e) =>{
     if(e === "/"){

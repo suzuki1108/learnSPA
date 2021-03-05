@@ -23,6 +23,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import {userInfo} from './MyBookShelf';
+import { UserInfoContext } from '.';
 
 function Copyright() {
     return (
@@ -124,7 +125,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Search(props) {
   const classes = useStyles();
 
-  const userId = props.location.state.userId;
+  const {state} = useContext(UserInfoContext);
 
   //検索ワードステート
   const[searchWord,setSearchWord] = useState("");
@@ -141,7 +142,6 @@ export default function Search(props) {
   };
 
   const doSearch = (e) => {
-    console.log(userId);
     let uri = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?format=json&title=${searchWord}&applicationId=1043481609307048393`
     const method = "GET";
     fetch(uri, {method})
@@ -161,7 +161,7 @@ export default function Search(props) {
       "salesDate":bookData.salesDate,
       "imgPath":bookData.largeImageUrl,
       "description":bookData.itemCaption,
-      "userId": userId
+      "userId": state.userId
   };
   const method = "POST";
   const body = JSON.stringify(userInput);
@@ -259,17 +259,7 @@ export default function Search(props) {
           </Grid>
         </Container>
       </main>
-      <userInfo.Provider value={userId}>
       <Footer/>
-      </userInfo.Provider>
-      {/* Footer */}
-      {/* <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          MyBookShelf ver.2.0
-        </Typography>
-        <Copyright />
-      </footer> */}
-      {/* End footer */}
     </React.Fragment>
   );
 }

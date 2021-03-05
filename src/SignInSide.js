@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Component, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
@@ -63,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
 export default function SignInSide() {
   const classes = useStyles();
   const history = useHistory();
+
+  //グローバルステート（UserId）
+  const {state, dispach} = useContext(SiteContext);
 
   //userID形式チェック正規表現
   const userIdReg = /^[a-z\d]{8,15}$/i;
@@ -143,9 +146,12 @@ export default function SignInSide() {
       .then(data => {
         setApiMsg(data.message);
         if(data.result){
-			      history.push(
-              {pathname: "/MyBookShelf", state: {"userId":data.userId,"userName":data.userName}}
-            );
+            //グローバルステートにUserIDを格納し、MyBookShelfへ遷移
+            dispach({
+              type: "CHANGE",
+              userId: data.userId
+            })
+			      history.push("/MyBookShelf");
         }
       })
       .catch(console.error);

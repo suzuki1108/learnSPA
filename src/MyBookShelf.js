@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Component, useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
@@ -19,6 +19,7 @@ import Footer from './footer';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { UserInfoContext } from '.';
 
 function Copyright() {
     return (
@@ -117,14 +118,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const userInfo = React.createContext();
 
 export default function MyBookShelf(props) {
   const classes = useStyles();
 
-  const userId = props.location.state.userId;
-  const userName = props.location.state.userName;
-
+  const { state } = useContext(UserInfoContext);
+ 
   //検索結果JSONステート
   const [data ,setData] = useState([]);
 
@@ -137,7 +136,7 @@ export default function MyBookShelf(props) {
 
   const doSearch = () => {
     const userInput = {
-      "userId":userId
+      "userId":state.userId
     };
     const method = "POST";
     const body = JSON.stringify(userInput);
@@ -237,17 +236,6 @@ export default function MyBookShelf(props) {
         </Container>
       </main>
       <Footer/>
-      <userInfo.Provider value={userId}>
-        <Footer/>
-      </userInfo.Provider>
-      {/* Footer */}
-      {/* <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          MyBookShelf ver.2.0
-        </Typography>
-        <Copyright />
-      </footer> */}
-      {/* End footer */}
     </React.Fragment>
   );
 }
