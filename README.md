@@ -1,5 +1,5 @@
 # アプリケーションの概要
-http://learn-spa-bookshelf.herokuapp.com/ <br/>
+https://learn-spa-bookshelf.herokuapp.com/ <br/>
 楽天BooksAPIを利用した、本棚管理用のWebアプリケーションです。<br/>
 ※SpringBoot学習用に作成したアプリケーションをAPI化し、SPA化しました。<br/>
 
