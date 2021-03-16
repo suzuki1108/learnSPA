@@ -1,24 +1,24 @@
-#アプリケーションの概要
+# アプリケーションの概要
 楽天BooksAPIを利用した、本棚管理用のWebアプリケーションです。
 ※SpringBoot学習用に作成したアプリケーションをAPI化し、SPA化しました。
 
-#使用技術
-##フロント
+# 使用技術
+## フロント
 React.js
 node.js
 Material-UI
-##バックエンド
+## バックエンド
 Java8
 SpringBoot
 PostgreSQL
-##サーバ
+## サーバ
 heroku
 
-#ゲスト用アカウント
+# ゲスト用アカウント
 USER_ID:guestuser001
 PASSWORD:password01
 
-#注意事項
+# 注意事項
 heroku無料プランでデプロイしているため、
 サーバは常時稼働ではありません。
 初回起動＆初回ログイン時（API通信時）は、１〜２分時間がかかります。
